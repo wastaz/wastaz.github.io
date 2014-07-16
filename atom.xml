@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Freds blog about nerdy stuff]]></title>
+  <link href="http://wastaz.github.io/atom.xml" rel="self"/>
+  <link href="http://wastaz.github.io/"/>
+  <updated>2014-07-16T14:18:11+02:00</updated>
+  <id>http://wastaz.github.io/</id>
+  <author>
+    <name><![CDATA[Fred]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A new hope]]></title>
+    <link href="http://wastaz.github.io/blog/2014/07/16/a-new-hope/"/>
+    <updated>2014-07-16T14:01:05+02:00</updated>
+    <id>http://wastaz.github.io/blog/2014/07/16/a-new-hope</id>
+    <content type="html"><![CDATA[<p>So I&rsquo;ve decided to take up blogging&hellip;</p>
+
+<!--more-->
+
+
+<p>I hope that in a year I&rsquo;ll look back to this post and think &ldquo;Oh my god! Why did I ever start out with one of those silly <em>I hope I&rsquo;ll still be doing this in a year</em>-posts&rdquo;. But who knows what happens between now and then.</p>
+
+<p>Welcome, I guess.</p>
+]]></content>
+  </entry>
+  
+</feed>
