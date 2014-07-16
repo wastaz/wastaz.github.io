@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: facebook | Freds blog about nerdy stuff]]></title>
+  <link href="http://wastaz.github.io/blog/categories/facebook/atom.xml" rel="self"/>
+  <link href="http://wastaz.github.io/"/>
+  <updated>2014-07-16T18:22:31+02:00</updated>
+  <id>http://wastaz.github.io/</id>
+  <author>
+    <name><![CDATA[Fred]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Facebook, Twitter and Google authentication with ServiceStack]]></title>
+    <link href="http://wastaz.github.io/blog/2014/07/16/facebook/"/>
+    <updated>2014-07-16T17:11:29+02:00</updated>
+    <id>http://wastaz.github.io/blog/2014/07/16/facebook</id>
+    <content type="html"><![CDATA[<p>So, you want to use the awesome authentication feature in <a href="http://www.servicestack.net">ServiceStack</a> to authenticate via Facebook, Twitter and/or Google? It all seems to simple when reading the ServiceStack documentation &ndash; but there are still some things that might catch you unaware.</p>
+
+<!--more-->
+
+
+<h2>Let&rsquo;s get started!</h2>
+
+<p>Ok, so to authenticate we&rsquo;re going to need a basic service to authenticate with. I&rsquo;m going to use a very basic hello world service as my example here. My hello world service looks like this:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Authenticate]</span>
+</span><span class='line'><span class="na">[Route(&amp;ldquo;/hello&amp;rdquo;)]</span>
+</span><span class='line'><span class="na">[Route(&amp;ldquo;/hello/{Name}&amp;rdquo;)]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">Hello</span> <span class="p">:</span> <span class="n">IReturn</span><span class="p">&lt;</span><span class="n">HelloResponse</span><span class="p">&gt;</span> <span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">public</span> <span class="k">class</span> <span class="nc">HelloResponse</span> <span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">public</span> <span class="kt">string</span> <span class="n">Result</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">public</span> <span class="k">class</span> <span class="nc">HelloService</span> <span class="p">:</span> <span class="n">Service</span> <span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">public</span> <span class="n">HelloResponse</span> <span class="n">Any</span><span class="p">(</span><span class="n">Hello</span> <span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">new</span> <span class="n">HelloResponse</span> <span class="p">{</span><span class="n">Result</span> <span class="p">=</span> <span class="s">&quot;Hello {0}&quot;</span><span class="p">.</span><span class="n">Fmt</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">Name</span><span class="p">)};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Simple, eh? And of course I have an apphost which looks like this, I&rsquo;m using a local <a href="http://www.mongodb.org/">MongoDb</a> instance here, but of course you could use any authentication repository you&rsquo;d like.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">class</span> <span class="nc">AppHost</span> <span class="p">:</span> <span class="n">AppHostBase</span> <span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="k">public</span> <span class="n">AppHost</span><span class="p">()</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="s">&quot;Hello Web Services&quot;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="k">typeof</span><span class="p">(</span><span class="n">HelloService</span><span class="p">).</span><span class="n">Assembly</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Configure</span><span class="p">(</span><span class="n">Funq</span><span class="p">.</span><span class="n">Container</span> <span class="n">container</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">appSettings</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppSettings</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">connectionString</span> <span class="p">=</span> <span class="s">&quot;mongodb://localhost&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">mongoClient</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">connectionString</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">mongoDb</span> <span class="p">=</span> <span class="n">mongoClient</span><span class="p">.</span><span class="n">GetServer</span><span class="p">().</span><span class="n">GetDatabase</span><span class="p">(</span><span class="s">&quot;authenticationtest&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">//register any dependencies your services use, e.g:</span>
+</span><span class='line'>    <span class="n">container</span><span class="p">.</span><span class="n">Register</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">ICacheClient</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;(</span><span class="k">new</span> <span class="n">MemoryCacheClient</span><span class="p">());</span>
+</span><span class='line'>    <span class="n">container</span><span class="p">.</span><span class="n">Register</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">IAuthRepository</span><span class="p">&amp;</span><span class="n">gt</span><span class="p">;(</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">MongoDbAuthRepository</span><span class="p">(</span><span class="n">mongoDb</span><span class="p">,</span> <span class="k">true</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">Plugins</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">AuthFeature</span><span class="p">(()</span> <span class="p">=&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="k">new</span> <span class="n">AuthUserSession</span><span class="p">(),</span>
+</span><span class='line'>        <span class="k">new</span> <span class="n">IAuthProvider</span><span class="p">[]</span> <span class="p">{</span>
+</span><span class='line'>                              <span class="k">new</span> <span class="nf">FacebookAuthProvider</span><span class="p">(</span><span class="n">appSettings</span><span class="p">),</span>
+</span><span class='line'>                              <span class="k">new</span> <span class="nf">GoogleOAuth2Provider</span><span class="p">(</span><span class="n">appSettings</span><span class="p">),</span>
+</span><span class='line'>                              <span class="k">new</span> <span class="nf">TwitterAuthProvider</span><span class="p">(</span><span class="n">appSettings</span><span class="p">),</span>
+</span><span class='line'>                             <span class="p">}));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>So&hellip;is this enough? No, actually not. You also need to configure the authentication providers, and this is done in the appSettings part of your web/app.config file.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;appSettings&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>add key=&quot;oauth.RedirectUrl&quot;
+</span><span class='line'>     value=&quot;http://localhost:53789/&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>!-- Should match with OAuth2&#39;s App Callback URL --<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.CallbackUrl&quot;
+</span><span class='line'>     value=&quot;http://localhost:53789/auth/{0}&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>!-- Create Facebook App at: https://developers.facebook.com/apps --<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.facebook.Permissions&quot;
+</span><span class='line'>     value=&quot;email,public_profile&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.facebook.AppId&quot;
+</span><span class='line'>     value=&quot;YOUR_FACEBOOK_APP_ID&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.facebook.AppSecret&quot;
+</span><span class='line'>     value=&quot;YOUR_FACEBOOK_APP_SECRET&quot; /<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>!-- Create Twitter App at: https://dev.twitter.com/apps --<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.twitter.ConsumerKey&quot;
+</span><span class='line'>     value=&quot;YOUR_TWITTER_CONSUMER_KEY&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.twitter.ConsumerSecret&quot;
+</span><span class='line'>     value=&quot;YOUR_TWITTER_CONSUMER_SECRET&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="ni">&amp;lt;</span>!-- Create Google App at: https://code.google.com/apis/console/ --<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.GoogleOAuth.ConsumerKey&quot;
+</span><span class='line'>     value=&quot;YOUR_GOOGLE_OAUTH2_CONSUMER_KEY&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>add key=&quot;oauth.GoogleOAuth.ConsumerSecret&quot;
+</span><span class='line'>     value=&quot;YOUR_GOOGLE_OAUTH2_CONSUMER_SECRET&quot;/<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;&lt;/appSetting&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Wow, that&rsquo;s a mouthful of secret codes! We&rsquo;re going to look at where we get these codes and keys later on. But for now, have a look at the first two configuration options, <code>oauth.RedirectUrl</code> and <code>oauth.CallbackUrl</code>.</p>
+
+<p>These should point at where you want your user to be redirected to when they&rsquo;ve performed the actual authentication (which happens on facebook, twitter or google). If you want to have different places on your site that your user ends up depending on who they authenticated with you can do so by adding a configuraiton option with the name <code>oauth.PROVIDERNAME.RedirectUrl</code> or <code>oauth.PROVIDERNAME.CallbackUrl</code> if the provider is an oauth2 provider. But generally, you wouldn&rsquo;t want this. So by omitting the providername you are setting the default fallbackvalue for all providers.</p>
+
+<p>But where do you get these codes? Well, that&rsquo;s pretty easy. You follow these links and register your app</p>
+
+<ul>
+<li><a href="https://developers.facebook.com/apps">Facebook</a></li>
+<li><a href="https://dev.twitter.com/apps">Twitter</a></li>
+<li><a href="https://code.google.com/apis/console/">Google</a></li>
+</ul>
+
+
+<h3>Facebook</h3>
+
+<p>For facebook, you must register as a developer and then you must create a new app. Creating a new app is done under the Apps menu on top.
+After you&rsquo;ve done this, you&rsquo;ll get your app id and app secret and you can put them in your config file.</p>
+
+<p>But wait! It doesn&rsquo;t work just yet!</p>
+
+<p><img class="center" src="/images/facebook_auth_error.png"></p>
+
+<p>Damn that facebook! Always standing in the way of our authentication heaven!
+The problem here is that we have not yet told facebook about our website. If we go to the settings panel and click the <em>Add Platform</em> button and add our website, then everything will work perfectly.</p>
+
+<p><img class="center" src="/images/facebook_auth.png"></p>
+
+<p>I&rsquo;m using localhost:53789 here because that&rsquo;s where I run my development server. If you&rsquo;re using this in production you should of course put in your real website address here :)</p>
+
+<h3>Twitter</h3>
+
+<p>For twitter, you&rsquo;ll have to &ldquo;create a new app&rdquo;. This is pretty straightforward except for one thing. If you&rsquo;re doing this on your non-production machine and want to type in <code>localhost</code> as your website&hellip;don&rsquo;t!</p>
+
+<p>If you do, you&rsquo;ll get this fantastic error message which tells you all about what is wrong and how to fix it.</p>
+
+<p><img class="center" src="/images/twitter_auth_error.png"></p>
+
+<p>What&rsquo;s that you say? It doesn&rsquo;t tell you anything at all about how to fix it? Yea&hellip;that&rsquo;s what I thought as well when I got this error message. However, Stack Overflow was kind enough to tell me that what it really means is that you may not put in <code>localhost</code> as your website. If you want to do that, you&rsquo;ll have to put in <code>127.0.0.1</code> instead. If you do that, everything works! Just go to the API Keys area once you&rsquo;ve managed to create your application and get your API key and API secret and you&rsquo;re on your way to greatness!</p>
+
+<h3>Google</h3>
+
+<p><em>Please remember that servicestack is using dotnetopenauth for the google authentication, this code wants to run in an ASP.NET environment, so if you try to run this self-hosted you&rsquo;ll most likely run into problems. If you&rsquo;re running self-hosted, you may want to skip Google OAuth2.</em></p>
+
+<p>Create or log in to your developer account and go to the credentials section. What you want to do is to create a new client id. As a web application you&rsquo;ll need to put in your authorized javascript origins (localhost is fine here), and your authorized redirect uri. You will want to put your callback url as the authorized redirect uri &ndash; however you should be aware of that you need to actually put in the full redirect uri here. So for my example I would put <code>http://localhost:53789/auth/GoogleOAuth</code> since that is the actual url of the servicestack handler for google oauth.</p>
+
+<p>Once you&rsquo;ve created your client ID you&rsquo;ll get a client secret (this is you api secret) and a client id (this is your api key). Just plug the, in to your configuration and you should be all set!</p>
+
+<h2>That&rsquo;s it?</h2>
+
+<p>Yea, that&rsquo;s really it. The user can now authenticate via facebook, twitter or google by hitting the correct authentication endpoint (<code>/auth/twitter</code>, <code>/auth/facebook</code>, <code>/auth/GoogleOAuth</code>) and the user information will be available in the session unless you hook into the authentication flow and do something else with it before. But more about that some other time!</p>
+
+<p>Now that you have authentication in place, go forth and write code that actually does something. :)</p>
+]]></content>
+  </entry>
+  
+</feed>

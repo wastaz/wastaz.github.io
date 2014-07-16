@@ -1,24 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-
-  <title><![CDATA[Freds blog about nerdy stuff]]></title>
-  <link href="http://wastaz.github.io/atom.xml" rel="self"/>
-  <link href="http://wastaz.github.io/"/>
-  <updated>2014-07-16T18:22:31+02:00</updated>
-  <id>http://wastaz.github.io/</id>
-  <author>
-    <name><![CDATA[Fred]]></name>
-    
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+<!doctype html>
+  <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+  <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+  <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
   
-  <entry>
-    <title type="html"><![CDATA[Facebook, Twitter and Google authentication with ServiceStack]]></title>
-    <link href="http://wastaz.github.io/blog/2014/07/16/facebook/"/>
-    <updated>2014-07-16T17:11:29+02:00</updated>
-    <id>http://wastaz.github.io/blog/2014/07/16/facebook</id>
-    <content type="html"><![CDATA[<p>So, you want to use the awesome authentication feature in <a href="http://www.servicestack.net">ServiceStack</a> to authenticate via Facebook, Twitter and/or Google? It all seems to simple when reading the ServiceStack documentation &ndash; but there are still some things that might catch you unaware.</p>
+    
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Facebook, Twitter and Google authentication with ServiceStack - Freds blog about nerdy stuff</title>
+    <meta name="author" content="Fred">
+    
+    <meta name="description" content="Facebook, Twitter and Google authentication with ServiceStack Jul 16th, 2014 authentication c# facebook google servicestack twitter So, you want to &hellip;">
+    
+    <meta name="viewport" content="width=device-width">
+    <link rel="canonical" href="http://wastaz.github.io/blog/2014/07/16/facebook">
+    
+    <link href="/favicon.png" rel="icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+    <link href="/atom.xml" rel="alternate" title="Freds blog about nerdy stuff" type="application/atom+xml">
+  </head>
+
+
+  <body >
+
+    <header>
+      <div class="grid-wrapper">
+  <div class="grid">
+
+    <div class="grid__item two-fifths lap-four-sixths palm-one-whole">
+  <a href="/" class="site-title">Freds blog about nerdy stuff</a>
+</div>
+
+<div class="grid__item three-fifths lap-two-sixths palm-one-whole">
+  <nav>
+    <input type="checkbox" id="toggle">
+<label for="toggle" class="toggle" data-open="Main Menu" data-close="Close Menu"></label>
+<ul class="menu pull-right">
+  <li><a href="/blog/">Blog</a></li>
+</ul>
+
+  </nav>
+</div>
+
+  </div>
+</div>
+    </header>
+
+    
+
+    <div class="grid-wrapper">
+      <div class="grid grid-center">
+        
+        <div class="grid__item two-thirds lap-one-whole palm-one-whole">
+        
+
+          <article class="post">
+  <header>
+  
+  <h1 class="title indent">Facebook, Twitter and Google authentication with ServiceStack</h1>
+  
+
+  
+  <div class="meta clearfix">
+    
+
+
+
+
+
+
+
+
+  
+
+
+<time class="pull-left" datetime="2014-07-16T17:11:29+02:00" pubdate data-updated="true"><i class="icon-calendar"></i> Jul 16<sup>th</sup>, 2014</time>
+    
+
+  <div class="pull-left">
+    <i class="icon-tags"></i>
+    <ul class="tags unstyled">
+    
+      
+        <li><a class='category' href='/blog/categories/authentication/'>authentication</a></li>
+      
+        <li><a class='category' href='/blog/categories/c-number/'>c#</a></li>
+      
+        <li><a class='category' href='/blog/categories/facebook/'>facebook</a></li>
+      
+        <li><a class='category' href='/blog/categories/google/'>google</a></li>
+      
+        <li><a class='category' href='/blog/categories/servicestack/'>servicestack</a></li>
+      
+        <li><a class='category' href='/blog/categories/twitter/'>twitter</a></li>
+      
+    
+    </ul>
+  </div>
+
+    
+  </div>
+  
+</header>
+
+
+
+
+  <p>So, you want to use the awesome authentication feature in <a href="http://www.servicestack.net">ServiceStack</a> to authenticate via Facebook, Twitter and/or Google? It all seems to simple when reading the ServiceStack documentation &ndash; but there are still some things that might catch you unaware.</p>
 
 <!--more-->
 
@@ -192,12 +282,12 @@ After you&rsquo;ve done this, you&rsquo;ll get your app id and app secret and yo
 
 <p>But wait! It doesn&rsquo;t work just yet!</p>
 
-<p><img class="center" src="http://wastaz.github.io/images/facebook_auth_error.png"></p>
+<p><img class="center" src="/images/facebook_auth_error.png"></p>
 
 <p>Damn that facebook! Always standing in the way of our authentication heaven!
 The problem here is that we have not yet told facebook about our website. If we go to the settings panel and click the <em>Add Platform</em> button and add our website, then everything will work perfectly.</p>
 
-<p><img class="center" src="http://wastaz.github.io/images/facebook_auth.png"></p>
+<p><img class="center" src="/images/facebook_auth.png"></p>
 
 <p>I&rsquo;m using localhost:53789 here because that&rsquo;s where I run my development server. If you&rsquo;re using this in production you should of course put in your real website address here :)</p>
 
@@ -207,7 +297,7 @@ The problem here is that we have not yet told facebook about our website. If we 
 
 <p>If you do, you&rsquo;ll get this fantastic error message which tells you all about what is wrong and how to fix it.</p>
 
-<p><img class="center" src="http://wastaz.github.io/images/twitter_auth_error.png"></p>
+<p><img class="center" src="/images/twitter_auth_error.png"></p>
 
 <p>What&rsquo;s that you say? It doesn&rsquo;t tell you anything at all about how to fix it? Yea&hellip;that&rsquo;s what I thought as well when I got this error message. However, Stack Overflow was kind enough to tell me that what it really means is that you may not put in <code>localhost</code> as your website. If you want to do that, you&rsquo;ll have to put in <code>127.0.0.1</code> instead. If you do that, everything works! Just go to the API Keys area once you&rsquo;ve managed to create your application and get your API key and API secret and you&rsquo;re on your way to greatness!</p>
 
@@ -224,23 +314,162 @@ The problem here is that we have not yet told facebook about our website. If we 
 <p>Yea, that&rsquo;s really it. The user can now authenticate via facebook, twitter or google by hitting the correct authentication endpoint (<code>/auth/twitter</code>, <code>/auth/facebook</code>, <code>/auth/GoogleOAuth</code>) and the user information will be available in the session unless you hook into the authentication flow and do something else with it before. But more about that some other time!</p>
 
 <p>Now that you have authentication in place, go forth and write code that actually does something. :)</p>
-]]></content>
-  </entry>
+
+
+</article>
+
+ 
+<section id="disqus">
+  <h1 class="indent title">Comments</h1>
+  <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+
+
+        </div>
+
+        
+        <aside id="sidebar" class="grid__item one-third lap-one-whole palm-one-whole">
+          <div class="grid">
+
   
-  <entry>
-    <title type="html"><![CDATA[A new hope]]></title>
-    <link href="http://wastaz.github.io/blog/2014/07/16/a-new-hope/"/>
-    <updated>2014-07-16T14:01:05+02:00</updated>
-    <id>http://wastaz.github.io/blog/2014/07/16/a-new-hope</id>
-    <content type="html"><![CDATA[<p>So I&rsquo;ve decided to take up blogging&hellip;</p>
+<section class="social aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">
+    Find me somewhere else
+  </h1>
+  <ul class="unstyled">
+    
+    
+    <li><a class="github" href="//github.com/wastaz"><i class="icon-github"></i> Github</a></li>
+    
+    
+    <li><a class="linkedin" href="//linkedin.com/in/fredrikforssen"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+    
+    <li><a class="stackoverflow" href="//stackoverflow.com/users/271746/wasatz"><i class="icon-stackexchange"></i> StackOverflow</a></li>
+    <li><a class="twitter" href="//twitter.com/wastaz"><i class="icon-twitter"></i> Twitter</a></li>
+    
+  </ul>
+</section>
 
-<!--more-->
 
 
-<p>I hope that in a year I&rsquo;ll look back to this post and think &ldquo;Oh my god! Why did I ever start out with one of those silly <em>I hope I&rsquo;ll still be doing this in a year</em>-posts&rdquo;. But who knows what happens between now and then.</p>
+  <section id="recent-posts" class="aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">Recent Posts</h1>
+  <ul class="divided">
+    
+      <li class="post">
+        <a href="/blog/2014/07/16/facebook/">Facebook, Twitter and Google authentication with ServiceStack</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/16/a-new-hope/">A new hope</a>
+      </li>
+    
+  </ul>
+</section>
 
-<p>Welcome, I guess.</p>
-]]></content>
-  </entry>
+<section id="twitter-timeline" class="aside-module grid__item one-whole lap-one-half">
+  <h1 class="title delta">
+    Latest Tweets
+    
+    <small class="pull-right">
+      <a class="btn" href="//twitter.com/wastaz" title="@wastaz on Twitter" target="_blank">
+        <i class="icon-external-link"></i>
+      </a>
+    </small>
+    
+  </h1>
+
+  <a class="twitter-timeline" data-dnt="true" href="//twitter.com/wastaz"  data-widget-id="489381157448859648"  data-link-color="#049cdb" data-tweet-limit="" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @wastaz</a>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</section>
+
+
+
+</div>
+
+        </aside>
+        
+      </div>
+    </div>
+
+    <footer>
+      <div class="grid-wrapper">
+  <div class="grid">
+    <div class="grid__item">
+      <p class="copyright">
+  All content by Fred and licensed under <a href="//creativecommons.org/licenses/by-nc-sa/3.0/ie/">Creative Commons</a>.<br>
+  Code under <a href="//github.com/coogie/oscailte/blob/master/README.md">MIT Licence</a> unless otherwise stated.<br />
+  This blog is running on the fantastic <a href="//octopress.org">Octopress</a> blogging framework and is using the <a href="//github.com/coogie/oscailte/">Oscailte</a> theme by the talented <a href="//coog.ie/">Stephen Coogan</a>.
+</p>
+
+    </div>
+  </div>
+</div>
+
+    </footer>
+
+    <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
+<script defer src="/javascripts/octopress.js"></script>
+
+
+<script>
+  var _gaq=[['_setAccount','UA-52882864-1'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+
+<script>
+  var disqus_shortname = 'wastaz';
   
-</feed>
+    
+    // var disqus_developer = 1;
+    var disqus_identifier = 'http://wastaz.github.io/blog/2014/07/16/facebook/';
+    var disqus_url = 'http://wastaz.github.io/blog/2014/07/16/facebook/';
+    var disqus_script = 'embed.js';
+  
+  (function () {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  }());
+</script>
+
+
+
+
+<script>
+  $(document).ready(function(){
+    if (!window.jXHR){
+      var jxhr = document.createElement('script');
+      jxhr.type = 'text/javascript';
+      jxhr.src = '/javascripts/libs/jXHR.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jxhr, s);
+    }
+
+    github.showRepos({
+      user: 'wastaz',
+      count: 0,
+      skip_forks: true,
+      target: '#gh_repos'
+    });
+  });
+</script>
+<script src="/javascripts/github.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
