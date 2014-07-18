@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: don't do this | Freds blog about nerdy stuff]]></title>
+  <link href="http://wastaz.github.io/blog/categories/dont-do-this/atom.xml" rel="self"/>
+  <link href="http://wastaz.github.io/"/>
+  <updated>2014-07-18T16:28:03+02:00</updated>
+  <id>http://wastaz.github.io/</id>
+  <author>
+    <name><![CDATA[Fred]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Magic 2015: Duels of the Product manager]]></title>
+    <link href="http://wastaz.github.io/blog/2014/07/18/magic-2015-duels-of-the-product-manager/"/>
+    <updated>2014-07-18T15:28:46+02:00</updated>
+    <id>http://wastaz.github.io/blog/2014/07/18/magic-2015-duels-of-the-product-manager</id>
+    <content type="html"><![CDATA[<p><img class="img&mdash;left" src="/images/Magic_2015_small.jpg" width="200" height="277">
+So, <a href="http://store.steampowered.com/app/255420/">Magic 2015: Duels of the Planeswalker</a> is finally out for Steam. I&rsquo;ve been playing this series for a while and while the games have always felt solid they&rsquo;ve always been missing that one thing that keeps me loving this kind of games. Deck building.</p>
+
+<p>So imagine my surprise and joy when it was announced that Magic 2015 would include deck building! Hooray! The holy grail is finally here!</p>
+
+<p>Except..it&rsquo;s not.</p>
+
+<!--more-->
+
+
+<p>The problem is the in-app purchases. When I pre-ordered I realized that there was this thing called &ldquo;card collections&rdquo; which you could buy as in-app purchases (or if you bought the ultimate edition you got all of them included). After some googling I found out that this is just a new version of the deck unlocks from the ealier planeswalker games. You could earn these cards while playing the game, or you could pay money up front to unlock everything without playing the game. Since I actually like having a sense of progression in my gaming I opted to not buy any of these card collections &ndash; but the idea of them being there didn&rsquo;t bother me. I actually like this type of in-app purchases, you really only buy time &ndash; nothing else.</p>
+
+<p>However, when I finally got my hands on the game and started playing it the game was very quick to point out to me that I&rsquo;d gotten a &ldquo;free premium booster&rdquo;, something that was apparently a very big deal. And then it finally clicked.</p>
+
+<p>Magic 2015 has several card collections, 5 of them match planes that you can go to in game (Ravnica, Innistrad, Theros, Shandalar, Zendikar)&hellip;but the final one is just named &ldquo;Premium&rdquo;, and this is the huge problem with this game.</p>
+
+<p>See, the 5 world-themed collections are all unlockable by playing the game. Sure, to unlock everything you&rsquo;ll have to grind and replay some content &ndash; but that&rsquo;s all right in my opinion. But the Premium collection is only obtainable by buying boosters &ndash; and there&rsquo;s no collection unlocking option for the premium collection. Also, the premium collection contains several very high-powered cards that I suspect will actually make a difference if you want to play this game in multiplayer.</p>
+
+<p>This is the worst way to do in-app purchases and Wizards really should have known this. Their earlier travels into the world of in-app purchases has all been pretty decent, mainly time-unlocks and vanity-unlocks. But this time they&rsquo;ve stepped over the line where they actually sell power-unlocks.</p>
+
+<p>My recommendation to you is that you don&rsquo;t buy this game. Please don&rsquo;t do it. I don&rsquo;t think I can return my game now since Steam is a bit iffy with returns&hellip;but please don&rsquo;t give them your money. And if you do decide to buy this game, please don&rsquo;t buy these Premium boosters. Don&rsquo;t give Wizards any indication that this is an acceptable inclusion!</p>
+
+<p>This whole thing reeks of a product manager who wants to &ldquo;maximize monetization&rdquo; or something like that, and I feel bad for the game devs who has to ruin their own game by including this kind of horrible anti-feature. Wizards, please get your shit together!</p>
+
+<p>Actually. Wizards, if you are reading this. Please turn duels of the planeswalker into a game series in the spirit of the old <a href="http://en.wikipedia.org/wiki/Magic:_The_Gathering_%28MicroProse%29">Microprose Magic: The Gathering</a> game instead! That game was completely awesome and I&rsquo;d easily pay full-price for a modern version of that game with slightly improved graphics and the latest magic sets. Oh, but keep the in-app purchases out of it please.</p>
+]]></content>
+  </entry>
+  
+</feed>
